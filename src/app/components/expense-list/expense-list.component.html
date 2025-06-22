@@ -1,0 +1,26 @@
+<h2 class="text-xl font-bold mb-3">Lista de gastos</h2>
+
+@if (expenses()?.length === 0) {
+  <p class="text-gray-500">No hay gastos cargados.</p>
+} @else {
+  <ul class="space-y-2">
+    @for (expense of expenses() ?? []; track expense.id) {
+      <li class="flex justify-between items-center p-2 bg-white rounded shadow">
+        <div>
+          <p class="font-semibold">{{ expense.nombre }}</p>
+          <p class="text-sm text-gray-600">
+            {{ expense.categoria }} - ${{ expense.monto }}
+          </p>
+        </div>
+        <div class="flex gap-3">
+          <button (click)="edit(expense)" class="text-blue-600 hover:underline">
+            Editar
+          </button>
+          <button (click)="delete(expense.id)" class="text-red-600 hover:underline">
+            Eliminar
+          </button>
+        </div>
+      </li>
+    }
+  </ul>
+}

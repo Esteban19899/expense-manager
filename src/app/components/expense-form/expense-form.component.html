@@ -1,0 +1,38 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4 bg-white p-4 rounded shadow">
+  <h2 class="text-xl font-bold">
+    {{ expense ? 'Editar gasto' : 'Agregar gasto' }}
+  </h2>
+
+  <div>
+    <label class="block font-semibold">Nombre</label>
+    <input type="text" formControlName="nombre" class="w-full border p-2 rounded" />
+  </div>
+
+  <div>
+    <label class="block font-semibold">Monto</label>
+    <input type="number" formControlName="monto" class="w-full border p-2 rounded" />
+  </div>
+
+  <div>
+    <label class="block font-semibold">Categoría</label>
+    <select formControlName="categoria" class="w-full border p-2 rounded">
+      <option value="Hogar">Hogar</option>
+      <option value="Salud">Salud</option>
+      <option value="Educacion">Educación</option>
+      <option value="Entretenimiento">Entretenimiento</option>
+      <option value="Otros">Otros</option>
+    </select>
+  </div>
+
+  <div>
+    <label class="block font-semibold">Fecha</label>
+    <input type="date" formControlName="fecha" class="w-full border p-2 rounded" />
+  </div>
+
+  <div class="flex justify-end gap-3 pt-2">
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">
+      {{ expense ? 'Guardar cambios' : 'Agregar' }}
+    </button>
+    <button type="button" class="text-gray-600" (click)="onCancel()">Cancelar</button>
+  </div>
+</form>
