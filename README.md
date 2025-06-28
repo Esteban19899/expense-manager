@@ -36,6 +36,16 @@ La aplicación utiliza un servicio centralizado (`ExpenseService`) para gestiona
 
 Este enfoque combina la robustez de la gestión de estado centralizada con `BehaviorSubject` y la simplicidad y el rendimiento del nuevo sistema de reactividad basado en Signals de Angular.
 
+---
+
+## 🔗 Enlace a StackBlitz
+
+Puedes ver y explorar este proyecto en vivo y en un entorno editable de StackBlitz aquí:
+
+[**Abrir ADondeSeMeFue en StackBlitz**](https://stackblitz.com/edit/angular-ivy-TU_ID_UNICO_STACKBLITZ)
+
+---
+
 ## 🖥️ Uso Local
 
 Para levantar y ejecutar esta aplicación en tu entorno local:
@@ -43,7 +53,7 @@ Para levantar y ejecutar esta aplicación en tu entorno local:
 1.  Asegúrate de tener [Node.js](https://nodejs.org/es/) y [Angular CLI](https://angular.io/cli) instalados.
 2.  Clona este repositorio:
     ```bash
-    git clone [URL_DE_TU_REPOSITORIO]
+    git clone [URL_REPO]
     ```
 3.  Navega a la carpeta del proyecto:
     ```bash
