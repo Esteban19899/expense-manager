@@ -12,11 +12,6 @@ import { toSignal } from '@angular/core/rxjs-interop';
 export class SummaryCardComponent {
   private expenseService = inject(ExpenseService);
 
- expenses = toSignal(this.expenseService.expenses$);
-
-  // Computed: total gastado sumando monto de todos los gastos
-  total = computed(() => {
-    const list = this.expenses(); // expenses$ convertido a signal
-    return list?.reduce((acc, e) => acc + e.monto, 0) ?? 0;
-  });
+  // Computed: total gastos mes actual
+  total = this.expenseService.totalCurrentMonthExpenses;
 }

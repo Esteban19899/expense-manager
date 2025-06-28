@@ -1,59 +1,62 @@
 # ADondeSeMeFue
+Esta es la versión MVP (Producto Mínimo Viable) de un gestor de gastos personales, diseñada para ayudarte a registrar y visualizar tus finanzas de manera sencilla.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.10.
+## 👨‍💻 Datos Personales
 
-## Development server
+* **Nombre y Apellido:** Esteban Villanueva
+* **DNI:** 34.759.729
+* **Email:** estebangv.2023@gmail.com
+* **Sede:** Tandil
 
-To start a local development server, run:
+## 🚀 Tecnologías
 
-```bash
-ng serve
-```
+* **Frontend:** Angular (versión 20.0.3)
+* **Estilos:** Bootstrap 5
+* **Iconos:** Bootstrap Icons
+* **Gráficos:** (Ng2-charts)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## ✨ Características (MVP)
 
-## Code scaffolding
+* Registro de nuevos gastos con detalles como nombre, monto, categoría y fecha.
+* Visualización del total de gastos incurridos en el mes actual.
+* Gráficos que muestran la evolución mensual de tus gastos.
+* Gráficos de distribución de gastos por categoría.
+* Historial de todos los gastos registrados.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## ⚙️ Servicio de Gestión de Gastos y Reactividad
 
-```bash
-ng generate component component-name
-```
+La aplicación utiliza un servicio centralizado (`ExpenseService`) para gestionar todos los datos relacionados con los gastos, implementando un patrón de reactividad moderno de Angular.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+* **Fuente de Datos:** Para propósitos de prueba y desarrollo, el servicio se conecta a un **MockAPI**. Esto simula una API de backend real sin la necesidad de un servidor complejo.
+* **Gestión de Estado (BehaviorSubject):** El servicio utiliza un `BehaviorSubject` de RxJS (`expensesSubject`) como **fuente privada y única de la verdad** para el estado de los gastos. Todas las operaciones (agregar, actualizar, eliminar) modifican este `BehaviorSubject`, el cual luego emite el nuevo estado.
+* **Exposición Pública (Observable):** El servicio expone un `Observable<Expense[]>` público (`expenses$`) derivado del `BehaviorSubject` (usando `asObservable()`). Este observable es solo de lectura, lo que previene que los componentes modifiquen directamente el estado encapsulado del servicio.
+* **Integración con Signals (`toSignal` y `computed`):**
+    * **Dentro del Servicio:** El `Observable` público (`expenses$`) se convierte en una Signal privada (`allExpensesSignal`) utilizando la función `toSignal` de `@angular/core/rxjs-interop`. Esto permite al servicio definir **Signals computadas (`computed`)** (como `totalCurrentMonthExpenses` y `currentMonthName`) que reaccionan automáticamente a los cambios en los datos de gastos, sin la necesidad de suscripciones explícitas dentro del propio servicio.
+    * **En los Componentes:** Los componentes (`CategoryChartComponent`, etc.) también utilizan `toSignal` para convertir el `Observable` `expenses$` del servicio en una `Signal` local. Esto significa que los componentes **no necesitan suscribirse manualmente** ni usar el `async` pipe en sus plantillas. Acceden a los datos llamando a la Signal como una función (`expenses()`), y Angular se encarga de la detección de cambios y la actualización de la vista de forma eficiente.
 
-```bash
-ng generate --help
-```
+Este enfoque combina la robustez de la gestión de estado centralizada con `BehaviorSubject` y la simplicidad y el rendimiento del nuevo sistema de reactividad basado en Signals de Angular.
 
-## Building
+## 🖥️ Uso Local
 
-To build the project run:
+Para levantar y ejecutar esta aplicación en tu entorno local:
 
-```bash
-ng build
-```
+1.  Asegúrate de tener [Node.js](https://nodejs.org/es/) y [Angular CLI](https://angular.io/cli) instalados.
+2.  Clona este repositorio:
+    ```bash
+    git clone [URL_DE_TU_REPOSITORIO]
+    ```
+3.  Navega a la carpeta del proyecto:
+    ```bash
+    cd mi-gestor-de-gastos
+    ```
+4.  Instala las dependencias:
+    ```bash
+    npm install
+    ```
+5.  Inicia la aplicación:
+    ```bash
+    ng serve
+    ```
+    La aplicación estará disponible en `http://localhost:4200/` (o el puerto que te indique la CLI).
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---

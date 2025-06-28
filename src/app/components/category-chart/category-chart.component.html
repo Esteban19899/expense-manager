@@ -1,1 +1,6 @@
-<p>category-chart works!</p>
+<div class="card">
+  <div class="card-body">
+    <h2 class="text-xl font-bold mb-3">{{currentMonthName}}</h2>
+      <canvas baseChart [type]="chartType" [data]="chartData()" [options]="chartOptions"></canvas>
+  </div>
+</div>

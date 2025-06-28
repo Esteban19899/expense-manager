@@ -6,27 +6,20 @@ import { Expense } from '../../models/expense';
 
 @Component({
   selector: 'app-expense-list',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './expense-list.component.html',
   styleUrl: './expense-list.component.scss'
 })
 export class ExpenseListComponent {
-   private expenseService = inject(ExpenseService);
+  private expenseService = inject(ExpenseService);
 
-   // Convierto observable a signal para usar con @for/@if
-   expenses = toSignal(this.expenseService.expenses$);
-
-   // Evento para cuando se quiere editar un gasto
-  @Output() editExpense = new EventEmitter<Expense>();
-
+  // Convierto observable a signal para usar con @for/@if
+  expenses = toSignal(this.expenseService.expenses$);
 
   delete(id: number) {
     this.expenseService.deleteExpense(id);
-  }
+  } 
 
-  edit(expense : Expense) {
-    this.editExpense.emit(expense);
-  }
+} 
 
-
-}

@@ -13,7 +13,8 @@ import { CategoryChartComponent } from '../category-chart/category-chart.compone
 
 @Component({
   selector: 'app-dashboard',
- imports: [
+  standalone: true,
+  imports: [
     CommonModule,
     ExpenseFormComponent,
     ExpenseListComponent,
@@ -21,35 +22,14 @@ import { CategoryChartComponent } from '../category-chart/category-chart.compone
     CategoryChartComponent,
     MonthlyChartComponent
   ],
-            
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
   private expenseService = inject(ExpenseService);
-  
-
-  // Estado: gasto que se quiere editar
-  expenseToEdit?: Expense = undefined;
 
   constructor() {
     this.expenseService.loadExpenses();
   }
 
-  onEdit(expense: Expense) {
-    this.expenseToEdit = expense;
-  }
-
-  onSubmit(expense: Expense) {
-    if (expense.id) {
-      this.expenseService.updateExpense(expense);
-    } else {
-      this.expenseService.addExpense(expense);
-    }
-    this.expenseToEdit = undefined;
-  }
-
-  onCancelEdit() {
-    this.expenseToEdit = undefined;
-  }
 }

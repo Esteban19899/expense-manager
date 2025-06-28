@@ -1,38 +1,72 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4 bg-white p-4 rounded shadow">
-  <h2 class="text-xl font-bold">
-    {{ expense ? 'Editar gasto' : 'Agregar gasto' }}
-  </h2>
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="mb-2">
+        <label class="fw-semibold">Nombre</label>
+        <input class="form-control" type="text" placeholder="Ej: Café con amigos ☕" formControlName="nombre"
+          [class.is-invalid]="shouldShowError('nombre')" />
+        @if (shouldShowError('nombre')) {
+        <div class="invalid-feedback">
+          @if (form.controls['nombre'].errors?.['required']) {
+          <div>El nombre es obligatorio.</div>
+          }
+        </div>
+        }
+      </div>
 
-  <div>
-    <label class="block font-semibold">Nombre</label>
-    <input type="text" formControlName="nombre" class="w-full border p-2 rounded" />
-  </div>
+      <div class="mb-2">
+        <label class="fw-semibold">Monto</label>
+        <input class="form-control" type="number" formControlName="monto" min="0" step="any"
+          [class.is-invalid]="shouldShowError('monto')" />
+        @if (shouldShowError('monto')) {
+        <div class="invalid-feedback">
+          @if (form.controls['monto'].errors?.['required']) {
+          <div>El monto es obligatorio.</div>
+          }
+          @if (form.controls['monto'].errors?.['min']) {
+          <div>El monto debe ser mayor a 0.</div>
+          }
+        </div>
+        }
+      </div>
 
-  <div>
-    <label class="block font-semibold">Monto</label>
-    <input type="number" formControlName="monto" class="w-full border p-2 rounded" />
-  </div>
+      <div class="mb-2">
+        <label class="fw-semibold">Categoría</label>
+        <select class="form-select" formControlName="categoria" [class.is-invalid]="shouldShowError('categoria')">
+          <option value="" disabled selected>Selecciona una categoría</option>
+          <option value="Hogar">🏠 Hogar</option>
+          <option value="Salud">🏥 Salud</option>
+          <option value="Servicios">💡 Servicios</option>
+          <option value="Educacion">📚 Educación</option>
+          <option value="Entretenimiento">🎮 Entretenimiento</option>
+          <option value="Alimentacion">🍎 Alimentación</option>
+          <option value="Transporte">🚗 Transporte</option>
+          <option value="Vestimenta">👕 Vestimenta</option>
+          <option value="Otros">📦 Otros</option>
+        </select>
+        @if (shouldShowError('categoria')) {
+        <div class="invalid-feedback">
+          @if (form.controls['categoria'].errors?.['required']) {
+          <div>La categoría es obligatoria.</div>
+          }
+        </div>
+        }
+      </div>
 
-  <div>
-    <label class="block font-semibold">Categoría</label>
-    <select formControlName="categoria" class="w-full border p-2 rounded">
-      <option value="Hogar">Hogar</option>
-      <option value="Salud">Salud</option>
-      <option value="Educacion">Educación</option>
-      <option value="Entretenimiento">Entretenimiento</option>
-      <option value="Otros">Otros</option>
-    </select>
-  </div>
+      <div class="mb-2">
+        <label class="fw-semibold">Fecha</label>
+        <input class="form-control" type="date" formControlName="fecha" [class.is-invalid]="shouldShowError('fecha')" />
+        @if (shouldShowError('fecha')) {
+        <div class="invalid-feedback">
+          @if (form.controls['fecha'].errors?.['required']) {
+          <div>La fecha es obligatoria.</div>
+          }
+        </div>
+        }
+      </div>
 
-  <div>
-    <label class="block font-semibold">Fecha</label>
-    <input type="date" formControlName="fecha" class="w-full border p-2 rounded" />
-  </div>
+      <button class="btn btn-primary mt-2" type="submit">Agregar gasto</button>
+    </form>
 
-  <div class="flex justify-end gap-3 pt-2">
-    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">
-      {{ expense ? 'Guardar cambios' : 'Agregar' }}
-    </button>
-    <button type="button" class="text-gray-600" (click)="onCancel()">Cancelar</button>
   </div>
-</form>
+</div>

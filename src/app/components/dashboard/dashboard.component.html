@@ -1,1 +1,27 @@
-<p>dashboard works!</p>
+<div class="container">
+
+    <div class="row mb-0">
+        <div class="col-12">
+            <app-summary-card></app-summary-card>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-0 align-items-stretch">
+        <div class="col-12 col-md-6 d-flex">
+            <app-expense-form class="w-100"></app-expense-form>
+        </div>
+        <div class="col-12 col-md-6 d-flex">
+            <app-monthly-chart class="w-100"></app-monthly-chart>
+        </div>
+    </div>
+
+    <div class="row g-4 align-items-stretch">
+        <div class="col-12 col-md-8 d-flex">
+            <app-expense-list class="w-100"></app-expense-list>
+        </div>
+        <div class="col-12 col-md-4 d-flex">
+            <app-category-chart class="w-100"></app-category-chart>
+        </div>
+    </div>
+
+</div>

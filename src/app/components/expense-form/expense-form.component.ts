@@ -1,8 +1,7 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ExpenseService } from '../../services/expense.service';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Expense } from '../../models/expense';
-
 
 @Component({
   selector: 'app-expense-form',
@@ -10,55 +9,48 @@ import { Expense } from '../../models/expense';
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './expense-form.component.html',
 })
-export class ExpenseFormComponent implements OnChanges {
-  @Input() expense?: Expense; // Si viene, es edición
-  @Output() submit = new EventEmitter<Expense>();
-  @Output() cancel = new EventEmitter<void>();
-
+export class ExpenseFormComponent {
   form: FormGroup;
+  formSubmitted: boolean = false; // Propiedad para controlar si se intentó enviar
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private expenseService: ExpenseService
+  ) {
     this.form = this.fb.group({
       nombre: ['', Validators.required],
-      monto: [0, [Validators.required, Validators.min(1)]],
+      monto: [null, [Validators.required, Validators.min(0.01)]],
       categoria: ['Otros', Validators.required],
-      fecha: [this.hoy(), Validators.required],
+      fecha: [this.hoy(), Validators.required]
     });
   }
 
-  // Se llama cuando cambia el input (por ejemplo, al hacer clic en "Editar")
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['expense'] && this.expense) {
-      this.form.patchValue(this.expense);
-    } else if (!this.expense) {
+  onSubmit() {
+    this.formSubmitted = true; // Al hacer submit, marcamos que se intentó enviar
+
+    if (this.form.valid) {
+      console.log('Formulario válido:', this.form.value);
+      this.expenseService.addExpense(this.form.value);
       this.form.reset({
         nombre: '',
-        monto: 0,
+        monto: null,
         categoria: 'Otros',
         fecha: this.hoy()
       });
+      this.formSubmitted = false; // Si el envío fue exitoso, restablecemos la bandera
+    } else {
+      console.log('Formulario inválido. Por favor, revisa los campos.');
     }
-  }
-
-  onSubmit() {
-    if (this.form.invalid) return;
-
-    const formValue = this.form.value;
-    const result: Expense = {
-      ...formValue,
-      id: this.expense?.id ?? undefined // si estamos editando, conserva el id
-    };
-
-    this.submit.emit(result);
-    this.form.reset(); // opcional: limpiar después de enviar
-  }
-
-  onCancel() {
-    this.cancel.emit();
-    this.form.reset();
   }
 
   private hoy(): string {
     return new Date().toISOString().split('T')[0];
+  }
+
+  // Método para determinar si se debe mostrar un error
+  shouldShowError(controlName: string): boolean {
+    const control = this.form.get(controlName);
+    // Mostrar error si el control es inválido Y el formulario ya ha sido intentado enviar
+    return !!control && control.invalid && this.formSubmitted;
   }
 }

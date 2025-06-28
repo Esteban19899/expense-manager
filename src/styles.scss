@@ -1,1 +1,94 @@
-/* You can add global styles to this file, and also import other style files */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+//Estilo de las cards
+.card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  /* Esquinas redondeadas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  /* Sombra suave */
+  padding: 20px 25px;
+  margin-bottom: 20px;
+  /* Espacio entre tarjetas */
+  transition: all 0.2s ease-in-out;
+  /* Transición para efectos de hover */
+
+  &:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    /* Sombra ligeramente más fuerte al pasar el ratón */
+    transform: translateY(-2px);
+    /* Pequeño levantamiento */
+  }
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-app-wrapper {
+  flex-grow: 1;
+  display: flex;
+  position: relative;
+}
+
+/* --- Estilos para el Sidebar --- */
+
+.app-sidebar-fixed {
+  position: fixed;
+  top: 0; /* Se pega a la parte superior de la ventana */
+  left: 0;
+  bottom: 0;
+  width: 60px; /* Ancho fijo y minimalista */
+  z-index: 1030;
+  overflow-x: hidden;
+  /* ¡ELIMINADO!: transition: width 0.3s ease-in-out; */ /* Ya no hay animación de hover */
+  background-color: var(--bs-body-bg); /* O bg-light de Bootstrap */
+
+  /* Centrado y Espaciado Interno */
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+}
+
+.app-sidebar-fixed .nav {
+  flex-grow: 1;
+  justify-content: flex-start;
+}
+
+.app-sidebar-fixed .nav-item {
+  width: 100%;
+  text-align: center;
+}
+
+.app-sidebar-fixed .nav-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 0;
+  color: var(--bs-body-color);
+}
+
+.app-sidebar-fixed .nav-link i {
+  font-size: 1.5rem;
+}
+
+.app-sidebar-fixed .nav-link span { 
+  display: none;
+}
+
+/* --- Estilos para el Contenido Principal --- */
+
+.main-content-area {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-bottom: 2rem;
+}
+
+
