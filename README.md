@@ -42,7 +42,7 @@ Este enfoque combina la robustez de la gestión de estado centralizada con `Beha
 
 Puedes ver y explorar este proyecto en vivo y en un entorno editable de StackBlitz aquí:
 
-[**Abrir ADondeSeMeFue en StackBlitz**](https://stackblitz.com/edit/angular-ivy-TU_ID_UNICO_STACKBLITZ)
+[**Abrir ADondeSeMeFue en StackBlitz**](https://stackblitz.com/~/github.com/Esteban19899/expense-manager)
 
 ---
 
