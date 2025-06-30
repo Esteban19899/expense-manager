@@ -1,10 +1,9 @@
 # ADondeSeMeFue
-Esta es la versión MVP (Producto Mínimo Viable) de un gestor de gastos personales, diseñada para ayudarte a registrar y visualizar tus finanzas de manera sencilla.
+Un gestor de gastos personales diseñado para ayudarte a registrar y visualizar tus finanzas de manera sencilla.
 
 ## 👨‍💻 Datos Personales
 
 * **Nombre y Apellido:** Esteban Villanueva
-* **DNI:** 34.759.729
 * **Email:** estebangv.2023@gmail.com
 * **Sede:** Tandil
 
@@ -13,7 +12,7 @@ Esta es la versión MVP (Producto Mínimo Viable) de un gestor de gastos persona
 * **Frontend:** Angular (versión 20.0.3)
 * **Estilos:** Bootstrap 5
 * **Iconos:** Bootstrap Icons
-* **Gráficos:** (Ng2-charts)
+* **Gráficos:** (Ng2-Charts)
 
 ## ✨ Características (MVP)
 
@@ -28,7 +27,7 @@ Esta es la versión MVP (Producto Mínimo Viable) de un gestor de gastos persona
 La aplicación utiliza un servicio centralizado (`ExpenseService`) para gestionar todos los datos relacionados con los gastos, implementando un patrón de reactividad moderno de Angular.
 
 * **Fuente de Datos:** Para propósitos de prueba y desarrollo, el servicio se conecta a un **MockAPI**. Esto simula una API de backend real sin la necesidad de un servidor complejo.
-* **Gestión de Estado (BehaviorSubject):** El servicio utiliza un `BehaviorSubject` de RxJS (`expensesSubject`) como **fuente privada y única de la verdad** para el estado de los gastos. Todas las operaciones (agregar, actualizar, eliminar) modifican este `BehaviorSubject`, el cual luego emite el nuevo estado.
+* **Gestión de Estado (BehaviorSubject):** El servicio utiliza un `BehaviorSubject` de RxJS (`expensesSubject`) como **fuente centralizada de verdad** para el estado de los gastos. Todas las operaciones (agregar, actualizar, eliminar) modifican este `BehaviorSubject`, el cual luego emite el nuevo estado.
 * **Exposición Pública (Observable):** El servicio expone un `Observable<Expense[]>` público (`expenses$`) derivado del `BehaviorSubject` (usando `asObservable()`). Este observable es solo de lectura, lo que previene que los componentes modifiquen directamente el estado encapsulado del servicio.
 * **Integración con Signals (`toSignal` y `computed`):**
     * **Dentro del Servicio:** El `Observable` público (`expenses$`) se convierte en una Signal privada (`allExpensesSignal`) utilizando la función `toSignal` de `@angular/core/rxjs-interop`. Esto permite al servicio definir **Signals computadas (`computed`)** (como `totalCurrentMonthExpenses` y `currentMonthName`) que reaccionan automáticamente a los cambios en los datos de gastos, sin la necesidad de suscripciones explícitas dentro del propio servicio.
@@ -53,7 +52,7 @@ Para levantar y ejecutar esta aplicación en tu entorno local:
 1.  Asegúrate de tener [Node.js](https://nodejs.org/es/) y [Angular CLI](https://angular.io/cli) instalados.
 2.  Clona este repositorio:
     ```bash
-    git clone [https://github.com/Esteban19899/expense-manager]
+    git clone https://github.com/Esteban19899/expense-manager
     ```
 3.  Navega a la carpeta del proyecto:
     ```bash
@@ -67,6 +66,6 @@ Para levantar y ejecutar esta aplicación en tu entorno local:
     ```bash
     ng serve
     ```
-    La aplicación estará disponible en `http://localhost:4200/` (o el puerto que te indique la CLI).
+    La aplicación estará disponible en `http://localhost:4200/`
 
 ---
