@@ -53,11 +53,11 @@ Para levantar y ejecutar esta aplicación en tu entorno local:
 1.  Asegúrate de tener [Node.js](https://nodejs.org/es/) y [Angular CLI](https://angular.io/cli) instalados.
 2.  Clona este repositorio:
     ```bash
-    git clone [URL_REPO]
+    git clone [https://github.com/Esteban19899/expense-manager]
     ```
 3.  Navega a la carpeta del proyecto:
     ```bash
-    cd mi-gestor-de-gastos
+    cd expense-manager
     ```
 4.  Instala las dependencias:
     ```bash

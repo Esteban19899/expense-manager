@@ -68,16 +68,14 @@ export class CategoryChartComponent {
   });
 
   // Opciones del gráfico tipo torta
-  public chartOptions: ChartOptions<ChartType> = { // 'public' es una buena práctica aquí
+  public chartOptions: ChartOptions<ChartType> = {
     responsive: true,
     plugins: {
       legend: {
         position: 'bottom',
       },
-      // Puedes añadir más plugins aquí, por ejemplo para tooltips o datalabels
     },
-    // Otras opciones específicas del gráfico de torta
   };
 
-  public chartType: ChartType = 'pie'; // 'public' es una buena práctica aquí
+  public chartType: ChartType = 'pie';
 }
