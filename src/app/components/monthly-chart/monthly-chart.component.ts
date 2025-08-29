@@ -24,14 +24,20 @@ export class MonthlyChartComponent {
 
   chartData = computed(() => {
     const data = this.expenses();
+    const today = new Date();
+    const currentYear = today.getFullYear();
 
     const monthlyTotals = Array(12).fill(0);
 
     data.forEach(exp => {
       const [year, month, day] = exp.fecha.split('-').map(Number);
-      const date = new Date(year, month - 1, day);
-      const monthIndex = date.getMonth(); // 0–11
-      monthlyTotals[monthIndex] += exp.monto;
+      const expenseYear = year; // El año del gasto viene del string de fecha
+      
+      if (expenseYear === currentYear) { // 👈 Condición para filtrar por el año actual
+        const date = new Date(year, month - 1, day);
+        const monthIndex = date.getMonth(); // 0–11
+        monthlyTotals[monthIndex] += exp.monto;
+      }
     });
 
     return {

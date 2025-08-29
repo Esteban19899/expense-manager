@@ -19,21 +19,22 @@ export class CategoryChartComponent {
   currentMonthName = this.expenseService.currentMonthName();
 
   // Cálculo de montos por categoría
-  chartData = computed(() => {
+// En tu CategoryChartComponent
+chartData = computed(() => {
     const data = this.expenses();
     const today = new Date();
     const currentMonth = today.getMonth(); // 0-11
     const currentYear = today.getFullYear();
     const categories = [
-      'Hogar',          // 1
-      'Salud',          // 2
-      'Servicios',      // 3
-      'Educacion',      // 4
-      'Entretenimiento',// 5
-      'Alimentacion',   // 6
-      'Transporte',     // 7
-      'Vestimenta',     // 8
-      'Otros'           // 9
+      'Hogar',
+      'Salud',
+      'Servicios',
+      'Educacion',
+      'Entretenimiento',
+      'Alimentacion',
+      'Transporte',
+      'Vestimenta',
+      'Otros'
     ];
     const amounts = categories.map(cat =>
       data.filter(e => {
@@ -51,22 +52,20 @@ export class CategoryChartComponent {
         {
           data: amounts,
           backgroundColor: [
-            '#009688',   // Hogar 
-            '#f04d4d',   // Salud 
-            '#f0c24d',   // Servicios 
-            '#4d68f0',   // Educación 
-            '#9C27B0',   // Entretenimiento 
-            '#FB8C00',   // Alimentación 
-            '#1fbd5c',   // Transporte 
-            '#f04d8e',   // Vestimenta 
-            '#9E9E9E'    // Otros (Gris neutro)
-
+            '#009688',
+            '#f04d4d',
+            '#f0c24d',
+            '#4d68f0',
+            '#9C27B0',
+            '#FB8C00',
+            '#1fbd5c',
+            '#f04d8e',
+            '#9E9E9E'
           ],
         },
       ],
     };
-  });
-
+});
   // Opciones del gráfico tipo torta
   public chartOptions: ChartOptions<ChartType> = {
     responsive: true,

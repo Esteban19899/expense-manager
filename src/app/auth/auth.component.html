@@ -1,0 +1,76 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="col-lg-4 col-md-6 col-sm-8">
+    <div class="card shadow p-4">
+      <div class="card-body">
+        <h2 class="card-title text-center mb-4">Autenticación</h2>
+
+        @if (authError) {
+          <div class="alert alert-danger mb-3" role="alert">
+            {{ authError }}
+          </div>
+        }
+
+        <form [formGroup]="authForm" (ngSubmit)="onLogin()">
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Email</label>
+            <input
+              class="form-control"
+              type="email"
+              placeholder="email@ejemplo.com"
+              formControlName="email"
+              [class.is-invalid]="shouldShowError('email')"
+            />
+            @if (shouldShowError('email')) {
+              <div class="invalid-feedback">
+                El email es obligatorio y debe tener un formato válido.
+              </div>
+            }
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Contraseña</label>
+            <input
+              class="form-control"
+              type="password"
+              placeholder="********"
+              formControlName="password"
+              [class.is-invalid]="shouldShowError('password')"
+            />
+            @if (shouldShowError('password')) {
+              <div class="invalid-feedback">
+                @if (authForm.controls['password'].errors?.['required']) {
+                  <div>La contraseña es obligatoria.</div>
+                }
+                @if (authForm.controls['password'].errors?.['minlength']) {
+                  <div>La contraseña debe tener al menos 6 caracteres.</div>
+                }
+              </div>
+            }
+          </div>
+
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary mt-3" type="submit" [disabled]="authForm.invalid">
+              Iniciar Sesión
+            </button>
+            <button
+              class="btn btn-secondary"
+              (click)="onRegister()"
+              type="button"
+            >
+              Registrarse
+            </button>
+          </div>
+        </form>
+
+        <hr class="my-4">
+
+        <div class="d-grid gap-2">
+          <button class="btn btn-outline-primary" type="button" (click)="signInWithGoogle()">
+            <img src="https://www.svgrepo.com/show/355037/google.svg" alt="Google Logo" style="height: 20px; vertical-align: middle; margin-right: 8px;">
+            Iniciar sesión con Google
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

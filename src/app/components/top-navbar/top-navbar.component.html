@@ -1,0 +1,27 @@
+<nav class="navbar bg-white border-bottom p-2">
+  <div class="container-fluid justify-content-end">
+    @if (currentUser()) {
+      <div class="dropdown">
+        <button
+          class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img
+            [src]="getAvatarUrl(currentUser()!)"
+            alt="Avatar de usuario"
+            class="rounded-circle"
+            style="width: 30px; height: 30px; margin-right: 8px;"
+          />
+          <span class="d-none d-sm-inline">{{ currentUser()!.email }}</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><span class="dropdown-item-text fw-bold">{{ currentUser()!.email }}</span></li>
+          <li><hr class="dropdown-divider" /></li>
+          <li><a class="dropdown-item" (click)="onLogout()">Cerrar sesión</a></li>
+        </ul>
+      </div>
+    }
+  </div>
+</nav>

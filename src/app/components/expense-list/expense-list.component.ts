@@ -17,7 +17,7 @@ export class ExpenseListComponent {
   // Convierto observable a signal para usar con @for/@if
   expenses = toSignal(this.expenseService.expenses$);
 
-  delete(id: number) {
+  delete(id: string): void {
     this.expenseService.deleteExpense(id);
   } 
 
