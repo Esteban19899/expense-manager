@@ -1,0 +1,19 @@
+
+.avatar-placeholder {
+  background-color: #673ab7; 
+  color: #fff;              /* Letra blanca */
+  font-weight: 500;          /* Grosor de fuente medio, no tan negrita */
+  font-size: 1.2rem;         /* Tamaño de la letra */
+  font-family: 'Roboto', sans-serif;
+  text-transform: uppercase; /* Asegura que la inicial siempre sea mayúscula */
+  display: flex;             /* Para centrar la letra */
+  align-items: center;       /* Centra verticalmente */
+  justify-content: center;   /* Centra horizontalmente */
+  width: 100%;               /* Asegura que ocupe todo el espacio del botón */
+  height: 100%;              /* Asegura que ocupe todo el espacio del botón */
+}
+
+
+:host ::ng-deep .dropdown-toggle::after {
+  display: none;
+}
