@@ -12,8 +12,3 @@
   width: 100%;               /* Asegura que ocupe todo el espacio del botón */
   height: 100%;              /* Asegura que ocupe todo el espacio del botón */
 }
-
-
-:host ::ng-deep .dropdown-toggle::after {
-  display: none;
-}

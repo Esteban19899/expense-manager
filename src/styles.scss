@@ -91,3 +91,6 @@ body {
   padding-bottom: 2rem;
 }
 
+.dropdown-toggle::after {
+  display: none;
+}
