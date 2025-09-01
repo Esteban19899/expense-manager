@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SupabaseService } from '../services/supabase.service';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
+
 
 @Component({
   selector: 'app-auth',
@@ -81,7 +83,7 @@ export class AuthComponent {
     const { error } = await this.supabaseService.supabaseClient.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: 'http://localhost:4200/dashboard'
+        redirectTo: environment.supabaseRedirectUrl
       }
     });
 
