@@ -1,4 +1,4 @@
-# 💸ADondeSeMeFue
+# ADondeSeMeFue💸
 Un gestor de gastos personales diseñado para ayudarte a registrar y visualizar tus finanzas de manera sencilla.
 
 ## 👨‍💻 Datos Personales
